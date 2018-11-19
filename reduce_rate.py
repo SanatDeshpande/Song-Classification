@@ -2,16 +2,35 @@ import os
 from pydub import AudioSegment as AS
 from pydub.playback import play
 import sys
+import argparse
 
-src = sys.argv[1]
-dest = sys.argv[2]
-frame_rate = int(sys.argv[3])
+ap = argparse.ArgumentParser()
+ap.add_argument('--source', required=True,
+                help='source directory where all the song files are')
+ap.add_argument('--dest', required=True,
+                help='destination directory where the reduced rate songs should go')
+ap.add_argument('--frame_rate', type=int, required=True,
+                help='new frame rate of songs')
+args = ap.parse_args()
+
+src = args.source
+dest = args.dest
+frame_rate = args.frame_rate
+
+if not dest.endswith("/"):
+    dest += "/"
+if not src.endswith("/"):
+    src += "/"
+
+if not os.path.isdir(dest):
+    os.system("mkdir " + dest)
+
 count = 0
-
 for root, dirs, files in os.walk(src):
     f = [root+'/'+i for i in files if i.endswith(".mp3")]
     for song in f:
-        if os.path.isfile(song.replace(src, dest)):            
+        print(root, src, dest)
+        if os.path.isfile(song.replace(src, dest)):
             continue
         if not os.path.isdir(root.replace(src, dest)):
             os.system("mkdir " + root.replace(src, dest))
@@ -21,3 +40,6 @@ for root, dirs, files in os.walk(src):
         except:
             continue
     print(root)
+    if count > 1:
+        break
+    count += 1
