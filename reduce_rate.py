@@ -21,6 +21,3 @@ for root, dirs, files in os.walk(src):
         except:
             continue
     print(root)
-    if count > 1:
-        break
-    count += 1
