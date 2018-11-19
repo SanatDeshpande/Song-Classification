@@ -1,4 +1,4 @@
-# 
+#
 Song-Classification
 
 To Setup Environment (run in sequence)
@@ -20,3 +20,11 @@ To deactivate:
 source deactivate
 
 
+To Prepare Data:
+
+reduce_rate.py takes song files and reduces the frame_rate to make it more workable
+
+prepare_data.py takes all songs and splits them into 3-second chunks, and also makes
+accompanying labels.
+
+The command line arg instructions should be visible when you try to run them.
