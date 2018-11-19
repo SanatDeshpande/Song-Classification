@@ -29,7 +29,6 @@ count = 0
 for root, dirs, files in os.walk(src):
     f = [root+'/'+i for i in files if i.endswith(".mp3")]
     for song in f:
-        print(root, src, dest)
         if os.path.isfile(song.replace(src, dest)):
             continue
         if not os.path.isdir(root.replace(src, dest)):
@@ -40,6 +39,3 @@ for root, dirs, files in os.walk(src):
         except:
             continue
     print(root)
-    if count > 1:
-        break
-    count += 1

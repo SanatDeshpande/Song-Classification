@@ -60,7 +60,6 @@ for count, f in enumerate(files):
     s, t = chop_and_label(f, labels_to_one_hot, songs_to_label, 3)
     songs += s
     targets += t
-    break
 
 #saves pickled arrays to file
 songs = np.asarray(songs)
