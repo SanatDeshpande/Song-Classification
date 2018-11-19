@@ -28,3 +28,4 @@ prepare_data.py takes all songs and splits them into 3-second chunks, and also m
 accompanying labels.
 
 The command line arg instructions should be visible when you try to run them.
+I recommend reducing to frame rate of 5000, but we can play around with that
