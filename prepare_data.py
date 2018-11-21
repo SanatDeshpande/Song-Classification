@@ -23,6 +23,8 @@ def chop_and_label(songfile, labels_to_one_hot, songs_to_label, chop):
     label_array = []
     for i in range(0, int(len(song)/(chop * 1000))):
         raw = song[i*1000*chop:(i+1)*1000*chop].raw_data
+        if len(raw) != 96000:
+            continue
         song_array.append(list(raw))
         genre_label = songs_to_label[track_id]
         label_array.append(labels_to_one_hot[genre_label])
@@ -54,17 +56,17 @@ files = []
 for r, d, f in os.walk(path):
     paths = [r + "/" + i for i in f if i.endswith(".mp3")]
     files += paths
-songs = []
-targets = []
-for count, f in enumerate(files):
-    s, t = chop_and_label(f, labels_to_one_hot, songs_to_label, 3)
-    songs += s
-    targets += t
 
-#saves pickled arrays to file
-songs = np.asarray(songs)
-targets = np.asarray(targets)
-with open("songs" , "wb") as f:
-    pickle.dump(songs, f)
-with open("labels", "wb") as f:
-    pickle.dump(targets, f)
+# songs = []
+# targets = []
+#test = set([])
+for count, f in enumerate(files):
+    songs, targets = chop_and_label(f, labels_to_one_hot, songs_to_label, 3)
+    # songs += s
+    # targets += t
+    songs = np.asarray(songs, dtype=np.float)
+    targets = np.asarray(targets, dtype=np.float)
+    with open("songs.data", "ab") as f:
+        songs.tofile(f)
+    with open("labels.data", "ab") as f:
+        targets.tofile(f)
