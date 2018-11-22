@@ -61,6 +61,8 @@ files = []
 for r, d, f in os.walk(path):
     paths = [r + "/" + i for i in f if i.endswith(".mp3")]
     files += paths
+#randomizes order
+np.random.shuffle(files)
 
 # songs = []
 # targets = []
