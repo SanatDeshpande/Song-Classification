@@ -22,10 +22,16 @@ source deactivate
 
 To Prepare Data:
 
-reduce_rate.py takes song files and reduces the frame_rate to make it more workable
+#download data
+wget http://opihi.cs.uvic.ca/sound/genres.tar.gz
 
-prepare_data.py takes all songs and splits them into 3-second chunks, and also makes
-accompanying labels.
+#extract file
+tar xzf genres.tar.gz
 
-The command line arg instructions should be visible when you try to run them.
-I recommend reducing to frame rate of 5000, but we can play around with that
+Here, we do a weird data transform that I don't quite understand yet. It's called a mel-spectrogram.
+First, pip install librosa.
+
+y, sr = librosa.load(filename) #will load your file.
+transformed = librosa.features.melspectrogram(y=y, sr=sr, n_mels=64, hop_length=256)
+
+#transformed is what we want, and it's supposedely a useful way of handling the sound data, but I'm not too sure yet what this buys us
