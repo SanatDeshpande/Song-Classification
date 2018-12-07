@@ -64,9 +64,9 @@ fig = plt.figure()
 # fig.set_size_inches(7.0, 7.0, forward=True)
 
 with open(sys.argv[1], "r") as f:
-    label_batch = f.read().split(",")
+    label_batch = f.read().strip().split(",")
 with open(sys.argv[2], "r") as f:
-    pred_batch = f.read().split(",")
+    pred_batch = f.read().strip().split(",")
 # classes = sorted(list(set(pred_batch)))
 classes = ['disco', 'jazz', 'classical', 'country', 'hiphop', 'metal', 'rock', 'pop', 'blues', 'reggae']
 # cm = confusion_matrix(label_batch, pred_batch, labels=classes)
